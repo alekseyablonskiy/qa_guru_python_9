@@ -3,10 +3,9 @@ from datetime import date
 from demoqa_tests.model.data.user import User
 from demoqa_tests.model.pages.practice_form import PracticeForm
 
-practice_form = PracticeForm()
-
 
 def test_registration_user():
+    practice_form = PracticeForm()
     user = User(
         first_name='Aleksey',
         last_name='Yablonskiy',
