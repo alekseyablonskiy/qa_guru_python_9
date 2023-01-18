@@ -1,19 +1,26 @@
-from demoqa_tests.model.data.user import aleksey
+from datetime import date
+
+from demoqa_tests.model.data.user import User
 from demoqa_tests.model.pages.practice_form import PracticeForm
+
+practice_form = PracticeForm()
 
 
 def test_registration_user():
-    practice_form = PracticeForm(aleksey)
+    user = User(
+        first_name='Aleksey',
+        last_name='Yablonskiy',
+        email='alekseyablonskiy@gmail.com',
+        phone='1234567890',
+        address='Minsk',
+        birthday=date(1996, 10, 27),
+        gender='Male',
+        subject='Computer Science',
+        hobbies='Music',
+        image='picture.jpg',
+        state='NCR',
+        city='Delhi')
+
     practice_form.open_page()
-    (practice_form.fill_name()
-        .fill_contacts()
-        .select_gender()
-        .select_birthday()
-        .input_subject()
-        .select_hobbies()
-        .send_image()
-        .input_address()
-        .select_state()
-        .select_city()
-        .submit())
-    practice_form.assert_results_registration()
+    practice_form.fill(user).submit()
+    practice_form.assert_results_registration(user)
